@@ -1,0 +1,676 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #2c3e50;
+    overflow-x: hidden;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    transition: background-color 1.5s ease;
+}
+
+body.lights-on {
+    background-color: #f9f7f2;
+}
+
+.desk {
+    width: 90%;
+    max-width: 1200px;
+    min-height: 600px;
+    background: rgba(43, 34, 26, 0.85);
+    border-radius: 15px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    padding: 30px;
+    position: relative;
+    overflow: hidden;
+    border: 12px solid #2d2119;
+    transition: all 1.5s ease;
+    margin-bottom: 20px;
+}
+
+body.lights-on .desk {
+    background: linear-gradient(to bottom, #8b5a2b, #6d4c2c);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.desk-lamp {
+    position: absolute;
+    top: 20px;
+    right: 50px;
+    width: 80px;
+    height: 150px;
+    background: linear-gradient(to bottom, #4a4a4a, #2b2b2b);
+    border-radius: 5px 5px 0 0;
+    transform: perspective(200px) rotateX(20deg);
+    z-index: 10;
+    cursor: pointer;
+}
+
+.lamp-light {
+    position: absolute;
+    top: 150px;
+    right: 30px;
+    width: 120px;
+    height: 120px;
+    background: radial-gradient(circle, rgba(255, 255, 224, 0.7) 0%, rgba(255, 255, 224, 0) 70%);
+    border-radius: 50%;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 1.5s ease;
+}
+
+body.lights-on .lamp-light {
+    opacity: 1;
+}
+
+.lamp-switch {
+    position: absolute;
+    bottom: 10px;
+    right: 30px;
+    width: 20px;
+    height: 20px;
+    background: #ffcc00;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.item {
+    position: absolute;
+    transition: all 0.5s ease;
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+body.lights-on .item {
+    opacity: 1;
+}
+
+/* ID Card Style */
+.id-card {
+    width: 350px;
+    height: 150px;
+    background: linear-gradient(135deg, #667eea 0%, #4ba271 100%);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    display: flex;
+    transform: rotate(2deg);
+    top: 60%;
+    left: 50%;
+    margin-left: -175px;
+    margin-top: -100px;
+    position: absolute;
+    color: white;
+    overflow: hidden;
+}
+
+.id-card::before {
+    content: "";
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    width: 80px;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+}
+
+.id-photo {
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-right: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    align-self: center;
+}
+
+.id-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.id-info {
+    flex: 1;
+    position: relative;
+    z-index: 2;
+}
+
+.id-info h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.id-info p {
+    font-size: 14px;
+    margin-bottom: 6px;
+    opacity: 0.9;
+}
+
+.id-info .nim {
+    font-family: 'Courier New', monospace;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 4px 8px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-top: 5px;
+}
+
+.id-university {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    font-size: 10px;
+    opacity: 0.7;
+    font-style: italic;
+}
+
+/* Hobby Items */
+.hobbies-section {
+    position: absolute;
+    bottom: 20px;
+    right: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 20px;
+    width: 300px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.hobbies-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #333;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+body.lights-on .hobbies-title {
+    color: #ffffff;
+}
+
+.hobby-list {
+    list-style: none;
+}
+
+.hobby-item-new {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+body.lights-on .hobby-item-new {
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.hobby-item-new:hover {
+    transform: translateX(5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.hobby-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 15px;
+    font-size: 20px;
+}
+
+.hobby-icon.coding {
+    background: #e3f2fd;
+    color: #1976d2;
+}
+
+.hobby-icon.gaming {
+    background: #f3e5f5;
+    color: #7b1fa2;
+}
+
+.hobby-icon.opportunities {
+    background: #e8f5e9;
+    color: #388e3c;
+}
+
+.hobby-text {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.hobby-desc {
+    font-size: 12px;
+    color: #666;
+    margin-top: 3px;
+}
+
+/* Hapus hobby items yang lama */
+.hobby-coding, .hobby-gaming, .hobby-opportunities,
+.hobby-popup-coding, .hobby-popup-music, .hobby-popup-gaming {
+    display: none;
+}
+
+/* Motto Style */
+.motto {
+    width: 220px;
+    padding: 15px;
+    background: #ffeb3b;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    transform: rotate(-10deg);
+    top: 70px;
+    left: 50%;
+    font-family: 'Dancing Script', cursive;
+    font-size: 18px;
+    text-align: center;
+    font-style: italic;
+}
+
+/* Diary Style */
+.diary {
+    width: 120px;
+    height: 160px;
+    background: #8d6e63;
+    border-radius: 5px 10px 10px 5px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+    transform: rotate(-5deg);
+    top: 350px;
+    left: 50px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.diary:before {
+    content: "";
+    position: absolute;
+    top: 10px;
+    bottom: 10px;
+    left: 10px;
+    width: 5px;
+    background: #5d4037;
+    border-radius: 2px;
+}
+
+.diary-content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    width: 400px;
+    height: 340px;
+    background: #f5f1e6;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    padding: 30px;
+    z-index: 1000;
+    opacity: 0;
+    transition: all 0.5s ease;
+}
+
+.diary-content h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    text-align: center;
+    color: #5d4037;
+}
+
+.diary-content p {
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 12px;
+    text-align: justify;
+    color: #333;
+}
+
+.diary-content.show {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 30px;
+    height: 30px;
+    background: #f44336;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Schedule Style */
+.schedule {
+    width: 120px;
+    height: 160px;
+    background: linear-gradient(135deg, #ccbc6a 0%, #bda24a 100%);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    transform: rotate(3deg);
+    bottom: 80px;
+    left: 180px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+    color: white;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.schedule:hover {
+    transform: rotate(0deg) scale(1.1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+}
+
+.schedule-content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0) rotateY(180deg);
+    width: 900px;
+    height: 580px;
+    background: linear-gradient(to bottom, #f8f9fa, #e9ecef);
+    border-radius: 12px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    padding: 25px;
+    z-index: 1000;
+    opacity: 0;
+    transition: all 0.5s ease;
+    backface-visibility: hidden;
+    overflow: hidden;
+    border: 2px solid #dee2e6;
+}
+
+.schedule-content.show {
+    transform: translate(-50%, -50%) scale(1) rotateY(0deg);
+    opacity: 1;
+}
+
+.schedule-content h2 {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #343a40;
+    border-bottom: 2px solid #bda24a;
+    padding-bottom: 10px;
+    font-weight: 600;
+}
+
+.schedule-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    font-size: 14px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.schedule-content th {
+    background: linear-gradient(135deg, #ccbc6a 0%, #bda24a 100%);
+    color: white;
+    padding: 12px 8px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.schedule-content td {
+    padding: 10px 8px;
+    text-align: left;
+    border-bottom: 1px solid #dee2e6;
+    color: #495057;
+}
+
+.schedule-content tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+.schedule-content tr:hover {
+    background-color: #e9ecef;
+    transition: background-color 0.2s ease;
+}
+
+/* Untuk judul kolom */
+.schedule-content th:nth-child(1) { width: 15%; }
+.schedule-content th:nth-child(2) { width: 30%; }
+.schedule-content th:nth-child(3) { width: 20%; }
+.schedule-content th:nth-child(4) { width: 15%; }
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+/* Laptop Style */
+.laptop {
+    width: 280px;
+    height: 190px;
+    background: #37474f;
+    border-radius: 10px 10px 0 0;
+    position: absolute;
+    top: 30px;
+    left: 70px;
+    transform: rotate(10deg);
+    text-decoration: none;
+    display: block;
+    transition: all 0.3s ease;
+}
+
+.laptop:hover {
+    transform: rotate(10deg) scale(1.05);
+}
+
+.laptop-screen {
+    width: 260px;
+    height: 160px;
+    background: #263238;
+    margin: 10px auto;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #4caf50;
+    font-size: 12px;
+    text-align: center;
+    padding: 10px;
+}
+
+.laptop-keyboard {
+    width: 190px;
+    height: 5px;
+    background: #000;
+    margin: 5px auto 0;
+    border-radius: 2px;
+}
+
+/* Overlay for modals */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s ease;
+}
+
+.overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Footer */
+.footer {
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    align-items: center;
+}
+
+.social-link {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    transition: transform 0.3s ease;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.social-link:hover {
+    transform: scale(1.2);
+}
+
+.social-link img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: brightness(0) invert(0); /* Untuk membuat logo hitam */
+}
+
+body.lights-on .social-link img {
+    filter: brightness(0) invert(0); /* Untuk membuat logo putih saat lights-on */
+}
+
+/* Dark mode text adjustments */
+.dark-text {
+    color: #ddd;
+}
+
+body.lights-on .dark-text {
+    color: #333;
+}
+
+@media (max-width: 768px) {
+    .desk {
+        padding: 15px;
+        height: auto;
+        min-height: 500px;
+    }
+    
+    .item {
+        position: relative;
+        margin: 15px;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+    }
+    
+    .id-card {
+        position: relative;
+        top: auto;
+        left: auto;
+        margin: 20px auto;
+    }
+    
+    .desk-lamp, .lamp-light {
+        display: none;
+    }
+    
+    .social-links {
+        gap: 20px;
+    }
+    
+    .social-link {
+        width: 35px;
+        height: 35px;
+    }
+}
+
+/* Dark mode text adjustments */
+.dark-text {
+    color: #ddd;
+}
+
+body.lights-on .dark-text {
+    color: #333;
+}
+
+@media (max-width: 768px) {
+    .desk {
+        padding: 15px;
+        height: auto;
+        min-height: 500px;
+    }
+    
+    .item {
+        position: relative;
+        margin: 15px;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+    }
+    
+    .id-card {
+        position: relative;
+        top: auto;
+        left: auto;
+        margin: 20px auto;
+    }
+    
+    .desk-lamp, .lamp-light {
+        display: none;
+    }
+    
+    .social-links {
+        gap: 20px;
+    }
+    
+    .social-link {
+        width: 35px;
+        height: 35px;
+    }
+}
